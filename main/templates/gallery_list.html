@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div style="
+    min-height: 100vh;
+    background: url('/static/images/bg06.jpg') center/cover no-repeat fixed;
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 15px;
+">
+    <div style="
+        width: 100%;
+        max-width: 900px;
+        background: rgba(0, 0, 0, 0.75);
+        border: 1px solid rgba(0, 255, 255, 0.4);
+        border-radius: 15px;
+        padding: 30px 25px;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        color: #e0f7ff;
+        animation: fadeInUp 1s ease;
+    ">
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        ">
+            <h3 style="
+                color: #00e6ff;
+                font-weight: 700;
+                margin: 0;
+            ">Gallery</h3>
+
+            <a href="{% url 'gallery_add' %}" style="
+                text-decoration: none;
+                background-color: #00e6ff;
+                border: none;
+                color: #001f33;
+                padding: 8px 16px;
+                border-radius: 8px;
+                font-weight: 600;
+                box-shadow: 0 0 10px #00ffff;
+                transition: all 0.3s ease;
+            "
+            onmouseover="this.style.background='#00ffff'; this.style.boxShadow='0 0 20px #00ffff';"
+            onmouseout="this.style.background='#00e6ff'; this.style.boxShadow='0 0 10px #00ffff';">
+                + Add New Image
+            </a>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table style="
+                width: 100%;
+                border-collapse: collapse;
+                color: #e0f7ff;
+                border: 1px solid rgba(0, 255, 255, 0.3);
+                box-shadow: 0 0 15px rgba(0,255,255,0.2);
+            ">
+                <thead>
+                    <tr style="
+                        background: linear-gradient(90deg, #00bfff, #00ffff);
+                        color: #001f33;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                    ">
+                        <th style="padding: 10px; text-align: left; border: 1px solid rgba(0,255,255,0.4);">Description</th>
+                        <th style="padding: 10px; text-align: left; border: 1px solid rgba(0,255,255,0.4);">Image</th>
+                        <th style="padding: 10px; text-align: left; border: 1px solid rgba(0,255,255,0.4);">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr style="transition: background 0.3s ease;"
+                        onmouseover="this.style.background='rgba(0,255,255,0.1)';"
+                        onmouseout="this.style.background='transparent';">
+                        <td style="padding: 10px; border: 1px solid rgba(0,255,255,0.2);">{{ item.description }}</td>
+                        <td style="padding: 10px; border: 1px solid rgba(0,255,255,0.2);">
+                            {% if item.image %}
+                                <img src="{{ item.image.url }}" width="100" style="
+                                    border-radius: 8px;
+                                    border: 1px solid rgba(0,255,255,0.4);
+                                    box-shadow: 0 0 10px #00ffff;
+                                ">
+                            {% endif %}
+                        </td>
+                        <td style="padding: 10px; border: 1px solid rgba(0,255,255,0.2);">
+                            <a href="{% url 'gallery_edit' item.id %}" style="
+                                text-decoration: none;
+                                background-color: #00bfff;
+                                color: #fff;
+                                padding: 6px 12px;
+                                border-radius: 6px;
+                                font-size: 0.85rem;
+                                font-weight: 600;
+                                box-shadow: 0 0 10px #00ffff;
+                                margin-right: 8px;
+                                transition: 0.3s ease;
+                            "
+                            onmouseover="this.style.background='#00ffff'; this.style.color='#001f33'; this.style.boxShadow='0 0 15px #00ffff';"
+                            onmouseout="this.style.background='#00bfff'; this.style.color='#fff'; this.style.boxShadow='0 0 10px #00ffff';">
+                                Edit
+                            </a>
+
+                            <a href="{% url 'gallery_delete' item.id %}" style="
+                                text-decoration: none;
+                                background-color: #ff4d4d;
+                                color: #fff;
+                                padding: 6px 12px;
+                                border-radius: 6px;
+                                font-size: 0.85rem;
+                                font-weight: 600;
+                                box-shadow: 0 0 10px #ff6666;
+                                transition: 0.3s ease;
+                            "
+                            onmouseover="this.style.background='#ff1a1a'; this.style.boxShadow='0 0 15px #ff1a1a';"
+                            onmouseout="this.style.background='#ff4d4d'; this.style.boxShadow='0 0 10px #ff6666';">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" style="
+                            text-align: center;
+                            padding: 15px;
+                            color: #00ffff;
+                            border: 1px solid rgba(0,255,255,0.3);
+                        ">
+                            No images available.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <a href="{% url 'dashboard' %}" style="
+                text-decoration: none;
+                background: transparent;
+                border: 1px solid #00e6ff;
+                color: #00e6ff;
+                padding: 8px 18px;
+                border-radius: 8px;
+                font-weight: 600;
+                transition: 0.3s ease;
+            "
+            onmouseover="this.style.background='rgba(0,255,255,0.2)'; this.style.boxShadow='0 0 15px #00ffff';"
+            onmouseout="this.style.background='transparent'; this.style.boxShadow='none';">
+                ← Back
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div style="min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:40px 20px;background:url('/static/images/bg06.jpg') center/cover no-repeat fixed;backdrop-filter:blur(6px);">
+    <div style="background:rgba(0,0,0,0.75);border:1px solid rgba(0,255,255,0.4);border-radius:15px;padding:30px;width:100%;max-width:900px;box-shadow:0 0 30px rgba(0,255,255,0.4);color:#e0f7ff;animation:fadeInUp 1s;">
+        
+        <!-- Header Section -->
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:15px;">
+            <h3 style="color:#00e6ff;font-weight:700;margin:0;">Services</h3>
+            <a href="{% url 'service_add' %}" style="background-color:#00e6ff;border:1px solid #00e6ff;color:#001f33;font-weight:600;padding:8px 14px;border-radius:8px;box-shadow:0 0 10px #00ffff;text-decoration:none;transition:0.3s ease;">+ Add New Service</a>
+        </div>
+
+        <!-- Table Section -->
+        <div style="overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;color:#e0f7ff;border:1px solid #00e6ff;">
+                <thead>
+                    <tr style="background:linear-gradient(90deg,#00bfff,#00ffff);color:#001f33;text-transform:uppercase;font-weight:700;">
+                        <th style="padding:10px;border:1px solid rgba(0,255,255,0.3);text-align:left;">Title</th>
+                        <th style="padding:10px;border:1px solid rgba(0,255,255,0.3);text-align:left;">Description</th>
+                        <th style="padding:10px;border:1px solid rgba(0,255,255,0.3);text-align:left;">Image</th>
+                        <th style="padding:10px;border:1px solid rgba(0,255,255,0.3);text-align:center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in services %}
+                    <tr style="transition:background 0.3s ease;">
+                        <td style="padding:10px;border:1px solid rgba(0,255,255,0.3);">{{ service.title }}</td>
+                        <td style="padding:10px;border:1px solid rgba(0,255,255,0.3);">{{ service.description }}</td>
+                        <td style="padding:10px;border:1px solid rgba(0,255,255,0.3);">
+                            {% if service.image %}
+                                <img src="{{ service.image.url }}" alt="{{ service.title }}" style="width:100px;border-radius:8px;border:1px solid #00ffff;box-shadow:0 0 10px #00ffff;">
+                            {% endif %}
+                        </td>
+                        <td style="padding:10px;text-align:center;border:1px solid rgba(0,255,255,0.3);">
+                            <a href="{% url 'service_edit' service.id %}" style="background-color:#00bfff;border:1px solid #00bfff;color:#fff;font-size:0.85rem;font-weight:600;padding:6px 10px;border-radius:6px;box-shadow:0 0 8px #00ffff;text-decoration:none;margin-right:5px;display:inline-block;transition:0.3s;">Edit</a>
+                            <a href="{% url 'service_delete' service.id %}" style="background-color:#ff4d4d;border:1px solid #ff4d4d;color:#fff;font-size:0.85rem;font-weight:600;padding:6px 10px;border-radius:6px;box-shadow:0 0 8px #ff6666;text-decoration:none;transition:0.3s;">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" style="text-align:center;padding:15px;color:#e0f7ff;">No services available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Back Button -->
+        <div style="text-align:center;margin-top:20px;">
+            <a href="{% url 'dashboard' %}" style="background:transparent;border:1px solid #00e6ff;color:#00e6ff;font-weight:600;padding:8px 14px;border-radius:8px;text-decoration:none;transition:all 0.3s ease;box-shadow:0 0 10px rgba(0,255,255,0.4);">← Back</a>
+        </div>
+    </div>
+</div>
+
+<!-- Responsive Inline CSS -->
+<style>
+@media (max-width: 768px) {
+    table th, table td { font-size: 0.9rem; }
+    img { width: 80px !important; }
+    a { font-size: 0.8rem !important; padding: 6px 10px !important; }
+}
+@media (max-width: 576px) {
+    h3 { font-size: 1.2rem !important; }
+    table th, table td { font-size: 0.8rem; padding: 8px !important; }
+    img { width: 70px !important; }
+}
+@media (max-width: 320px) {
+    h3 { font-size: 1rem !important; }
+    table th, table td { font-size: 0.7rem; padding: 6px !important; }
+    img { width: 60px !important; }
+    a { font-size: 0.7rem !important; padding: 4px 6px !important; }
+}
+</style>
+
+{% endblock %}

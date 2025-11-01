@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div style="
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: url('/static/images/bg06.jpg') center/cover no-repeat fixed;
+    backdrop-filter: blur(6px);
+    padding: 60px 20px;
+">
+    <div style="
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid rgba(0, 255, 255, 0.4);
+        border-radius: 15px;
+        padding: 35px;
+        width: 100%;
+        max-width: 950px;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        color: #e0f7ff;
+        animation: fadeInUp 1s ease;
+    ">
+        <h3 style="
+            color: #00e6ff;
+            text-shadow: 0 0 10px #00ffff, 0 0 15px #00bfff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        ">
+            Contact Messages
+        </h3>
+
+        <div style="overflow-x: auto; animation: fadeInUp 1s ease 0.3s;">
+            <table style="
+                width: 100%;
+                border-collapse: collapse;
+                color: #e0f7ff;
+                border: 1px solid rgba(0,255,255,0.3);
+                box-shadow: 0 0 20px rgba(0,255,255,0.2);
+            ">
+                <thead>
+                    <tr style="
+                        background: rgba(0,255,255,0.15);
+                        color: #00ffff;
+                        text-transform: uppercase;
+                    ">
+                        <th style="padding: 12px; border-bottom: 1px solid rgba(0,255,255,0.3); text-align:left;">Name</th>
+                        <th style="padding: 12px; border-bottom: 1px solid rgba(0,255,255,0.3); text-align:left;">Email</th>
+                        <th style="padding: 12px; border-bottom: 1px solid rgba(0,255,255,0.3); text-align:left;">Message</th>
+                        <th style="padding: 12px; border-bottom: 1px solid rgba(0,255,255,0.3); text-align:center;">Received At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for msg in messages %}
+                    <tr style="transition: 0.3s ease;"
+                        onmouseover="this.style.background='rgba(0,255,255,0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        <td style="padding: 12px; border-bottom: 1px solid rgba(0,255,255,0.2);">{{ msg.name }}</td>
+                        <td style="padding: 12px; border-bottom: 1px solid rgba(0,255,255,0.2);">{{ msg.email }}</td>
+                        <td style="padding: 12px; border-bottom: 1px solid rgba(0,255,255,0.2);">{{ msg.message }}</td>
+                        <td style="padding: 12px; border-bottom: 1px solid rgba(0,255,255,0.2); text-align:center;">
+                            {{ msg.created_at|date:"d M Y H:i" }}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" style="text-align:center; padding:20px; color:#aaa;">
+                            No messages received.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Back Button -->
+        <div style="text-align: center; margin-top: 25px;">
+            <a href="javascript:history.back()" 
+                style="
+                    text-decoration: none;
+                    border: 1px solid #00ffff;
+                    color: #00ffff;
+                    padding: 10px 25px;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    transition: 0.3s ease;
+                "
+                onmouseover="this.style.background='rgba(0,255,255,0.2)'; this.style.boxShadow='0 0 15px #00ffff';"
+                onmouseout="this.style.background='transparent'; this.style.boxShadow='none';">
+                ⬅ Back
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

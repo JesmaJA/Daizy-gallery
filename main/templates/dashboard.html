@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-5">
+    <!-- Welcome Section -->
+    <div class="text-center mb-4 animate__animated animate__fadeInDown">
+        <h2 class="neon-heading">Welcome {{ request.user.username }}!</h2>
+        <a href="{% url 'admin_logout' %}" class="btn btn-logout mt-2">Logout</a>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row g-3 justify-content-center">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 animate__animated animate__fadeInUp animate__delay-1s">
+            <div class="dashboard-card text-center">
+                <a href="{% url 'service_list' %}">Manage Services</a>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 animate__animated animate__fadeInUp animate__delay-2s">
+            <div class="dashboard-card text-center">
+                <a href="{% url 'gallery_list' %}">Manage Gallery</a>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 animate__animated animate__fadeInUp animate__delay-3s">
+            <div class="dashboard-card text-center">
+                <a href="{% url 'testimonial_list' %}">Manage Testimonials</a>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 animate__animated animate__fadeInUp animate__delay-4s">
+            <div class="dashboard-card text-center">
+                <a href="{% url 'contact_list' %}">Manage Contacts</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Neon heading */
+.neon-heading {
+    color: #00e6ff;
+    font-weight: 700;
+}
+
+/* Logout button */
+.btn-logout {
+    font-weight: 600;
+    color: #001f33;
+    background-color: #00bfff;
+    transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: #00ffff;
+    transform: scale(1.05);
+}
+
+/* Dashboard card */
+.dashboard-card {
+    background: rgba(0, 20, 40, 0.85);
+    border-radius: 15px;
+    padding: 25px 10px;
+    transition: all 0.3s ease;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(0, 40, 70, 0.9);
+}
+
+.dashboard-card a {
+    font-weight: 600;
+    color: #eef2f3;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.dashboard-card a:hover {
+    color: #00ffff;
+    text-shadow: 0 0 20px #00ffff;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 576px) {
+    .dashboard-card {
+        padding: 20px 5px;
+    }
+
+    .dashboard-card a {
+        font-size: 1rem;
+    }
+
+    .neon-heading {
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="service-form-container">
+    <div class="service-form-box animate__animated animate__fadeInUp">
+        <h3 class="form-title">{{ action }} Service</h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label>Title</label>
+                <input type="text" name="title" class="form-control" value="{{ service.title|default:'' }}" required>
+            </div>
+            <div class="mb-3">
+                <label>Description</label>
+                <textarea name="description" class="form-control" rows="4" required>{{ service.description|default:'' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label>Image</label>
+                <input type="file" name="image" class="form-control">
+                {% if service.image %}
+                    <img src="{{ service.image.url }}" alt="Service Image" class="preview-img mt-2">
+                {% endif %}
+            </div>
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'service_list' %}" class="btn btn-secondary">← Back</a>
+                <button type="submit" class="btn btn-success">{{ action }}</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+/* Full-page background with blur effect */
+body {
+    background: url('/static/images/bg06.jpg') center/cover no-repeat fixed;
+}
+
+/* Main form container */
+.service-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Black transparent box */
+.service-form-box {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.4);
+    border-radius: 15px;
+    padding: 35px 30px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    color: #e0f7ff;
+    backdrop-filter: blur(10px);
+    margin-top: 80px;
+}
+
+/* Title */
+.form-title {
+    text-align: center;
+    font-weight: 700;
+    color: #00e6ff;
+    margin-bottom: 25px;
+}
+
+/* Input and textarea fields */
+.form-control {
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid #00e6ff;
+    color: #e0f7ff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
+}
+
+.form-control:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 15px #00ffff;
+    outline: none;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* Buttons */
+.btn-success {
+    background-color: #00e6ff;
+    border-color: #00e6ff;
+    color: #001f33;
+    font-weight: 600;
+    box-shadow: 0 0 15px #00ffff;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #00ffff;
+    color: #001f33;
+    box-shadow: 0 0 25px #00ffff;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #00e6ff;
+    color: #00e6ff;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 255, 255, 0.2);
+    color: #00ffff;
+    box-shadow: 0 0 15px #00ffff;
+}
+
+/* Image preview */
+.preview-img {
+    width: 120px;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #00ffff;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+/* Label styling */
+label {
+    color: #00ffff;
+    font-weight: 600;
+    text-shadow: 0 0 5px #00bfff;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .service-form-box {
+        padding: 25px 20px;
+    }
+
+    .form-title {
+        font-size: 1.4rem;
+    }
+
+    .preview-img {
+        width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-form-box {
+        padding: 20px 15px;
+    }
+
+    .form-title {
+        font-size: 1.3rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 320px) {
+    .service-form-box {
+        padding: 15px 10px;
+    }
+
+    .form-title {
+        font-size: 1.1rem;
+    }
+
+    label, .btn {
+        font-size: 0.8rem;
+    }
+
+    .preview-img {
+        width: 80px;
+    }
+}
+</style>
+{% endblock %}

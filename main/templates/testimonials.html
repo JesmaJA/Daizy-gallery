@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section py-5 position-relative">
+    <div class="hero-overlay"></div>
+
+    <div class="container text-center position-relative hero-content">
+        <img src="{% static 'images/dollar.jpg' %}" alt="Daizy Art" class="hero-img mb-3" data-aos="zoom-in">
+        <h1 data-aos="fade-up" data-aos-delay="100">What Our Customers Say</h1>
+        <p data-aos="fade-up" data-aos-delay="200">
+            Hear from our happy customers who experienced the magic of handmade resin jewelry and creative artistry. 
+            Your satisfaction inspires our craft.
+        </p>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="container my-5">
+    <h2 class="mb-5 text-center" data-aos="fade-up">Testimonials</h2>
+    <div class="row">
+        {% for testimonial in testimonials %}
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="{{ forloop.counter0|add:100 }}">
+            <div class="card testimonial-card h-100 text-center p-4 shadow-sm">
+                {% if testimonial.photo %}
+                <img src="{{ testimonial.photo.url }}" class="rounded-circle mb-3 testimonial-img" alt="{{ testimonial.name }}">
+                {% endif %}
+                <h5 class="card-title">{{ testimonial.name }}</h5>
+                <p class="card-text">{{ testimonial.message }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<style>
+/* Hero Section */
+.hero-section {
+    background: url("{% static 'images/bg06.jpg' %}") center/cover no-repeat;
+    min-height: 60vh;
+    position: relative;
+    background-attachment: fixed;
+}
+.hero-overlay {
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,30,0.6);
+}
+.hero-content { 
+    position: relative; 
+    z-index:2; 
+    color:#e0f7ff; 
+}
+.hero-img {
+    width:160px; 
+    border-radius:50%; 
+    border:4px solid #00bfff; 
+    box-shadow:0 0 30px rgba(0,255,255,0.8);
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+.hero-img:hover { 
+    transform: scale(1.05); 
+    box-shadow:0 0 50px rgba(0,255,255,1);
+}
+.hero-section h1 { color:#00bfff;  }
+.hero-section p { color:#e0f7ff; }
+
+/* Testimonials Cards */
+.testimonial-card {
+    background: rgba(0, 30, 60, 0.7);
+    border-radius: 20px;
+    border: 2px solid rgba(0,195,255,0.6);
+    box-shadow: 0 0 25px rgba(0,195,255,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 35px rgba(0,255,255,1);
+}
+.testimonial-img {
+    width:80px; 
+    height:80px; 
+    object-fit:cover;
+    border: 3px solid #00bfff; 
+    box-shadow:0 0 20px rgba(0,255,255,0.7);
+}
+
+/* Heading & Paragraph */
+h2,h5 {
+    color:#00bfff;
+}
+
+p{
+    color: #e0f7ff;
+}
+/* Responsive */
+@media(max-width:768px){
+    .hero-img { width:120px; }
+    .testimonial-img { width:60px; height:60px; }
+}
+</style>
+
+{% endblock %}

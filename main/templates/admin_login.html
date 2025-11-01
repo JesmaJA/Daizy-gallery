@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="login-card animate__animated animate__fadeInDown">
+        <h3>Admin Login</h3>
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="text" class="form-control" name="username" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+    </div>
+</div>
+
+<style>
+/* Login card */
+.login-card {
+    background: rgba(0, 20, 40, 0.85);
+    border-radius: 20px;
+    padding: 50px 35px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+/* Heading */
+.login-card h3 {
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #00e6ff;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+}
+
+/* Form controls */
+.form-control {
+    padding: 14px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #00bfff;
+    background: rgba(0, 20, 40, 0.6);
+    color: #e0f7ff;
+}
+
+.form-control:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 10px #00ffff;
+    background: rgba(0, 20, 40, 0.8);
+    color: #e0f7ff;
+    outline: none;
+}
+
+/* Button */
+.btn-primary {
+    background-color: #00bfff;
+    border-color: #00bfff;
+    color: #0e0e10;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px #00ffff;
+}
+
+.btn-primary:hover {
+    background-color: #00ffff;
+    color: #0e0e10;
+    box-shadow: 0 0 25px #00ffff;
+    transform: scale(1.05);
+}
+
+/* Alert */
+.alert {
+    font-size: 0.95rem;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* Responsive for medium devices */
+@media (max-width: 576px) {
+    .login-card {
+        padding: 40px 25px;
+        max-width: 350px;
+    }
+
+    .login-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+
+    .btn-primary {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
+
+/* Responsive for small devices (320px) */
+@media (max-width: 320px) {
+    .login-card {
+        padding: 30px 15px;
+        max-width: 95%;
+    }
+
+    .login-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+}
+</style>
+
+{% endblock %}
